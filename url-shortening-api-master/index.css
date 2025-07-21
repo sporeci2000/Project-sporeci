@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "poppins", "sans-serif";
+    font-size: 18px;
+    margin-inline: auto;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.logo-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.logo-nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.logo-nav ul a {
+    text-decoration: none;
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+    color: hsl(257, 7%, 63%);
+}
+
+.user-buttons {
+    margin-left: 0.5rem;
+}
+
+.user-buttons ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-buttons ul a {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.2rem 1rem;
+    color: hsl(257, 7%, 63%);
+}
+
+.user-buttons ul .active {
+    padding: 0.4rem 1.2rem;
+    border-radius: 1rem;
+    background: hsl(180, 66%, 49%);
+    color: white
+}
+
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.nav-hamburger .pages {
+    display: block;
+    margin: 0.3rem auto;
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: black;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-part{
+    max-width:30rem;
+}
+
+.welcome-part h1{
+    font-size: 3rem;
+    margin:0.5rem;
+    color: hsl(260, 8%, 14%);
+}
+
+.welcome-part p{
+    color: hsl(257, 7%, 63%);
+    margin: 0.5rem;
+}
+
+.first-btn{
+    cursor: pointer;
+    background: hsl(180, 66%, 49%);
+    color:white;
+    font-size: 1.2rem;
+    border-radius: 1.2rem;
+    padding:0.5rem 1.7rem;
+    margin:0.5rem;
+    outline: none;
+    border: none;
+}
+
+.first-img{
+    width: 70%;
+}
+
+.input-field{
+    margin-top:1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(257, 27%, 26%);
+    position: relative;
+    padding: 1rem 1.5rem;
+    width:min(100%, 40rem);
+    border-radius: 0.3rem;
+    overflow: hidden;
+}
+
+input {
+    padding: 0.6rem 0.3rem;
+    border-radius: 0.2rem;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    margin: 0.5rem;
+    flex: 1;
+}
+
+.second-btn{
+   cursor: pointer;
+   color: white;
+   padding: 0.5rem;
+   border-radius: 0.2rem;
+   font-size: 1rem;
+   text-align: center;
+   background: hsl(180, 66%, 49%);
+   outline: none;
+   border: none; 
+}
