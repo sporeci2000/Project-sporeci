@@ -8,6 +8,12 @@ body {
     font-family: "poppins", "sans-serif";
     font-size: 18px;
     margin-inline: auto;
+    background-color: white;
+}
+
+header{
+    background-color: white;
+  
 }
 
 nav {
@@ -227,21 +233,21 @@ input {
     background: hsl(180, 66%, 49%);
 }
 
-footer{
+footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: hsl(260, 8%, 14%);
 }
 
-.links-list{
+.links-list {
     margin-top: 2rem;
 }
 
-ul li{
+ul li {
     list-style: none;
-    color:hsl(257, 7%, 63%);
-    margin:0.2rem 0;
+    color: hsl(257, 7%, 63%);
+    margin: 0.2rem 0;
 }
 
 .container:first-child {
@@ -249,12 +255,12 @@ ul li{
     font-weight: bold;
 }
 
-.social-media{
+.social-media {
     display: flex;
     justify-content: space-between;
 }
 
-.media-links{
+.media-links {
     margin-top: 2rem;
     padding: 0.4rem 0.5rem;
 }

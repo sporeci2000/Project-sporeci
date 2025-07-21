@@ -100,6 +100,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 https://www.w3schools.com/howto/howto_js_mobile_navbar.asp
 https://www.w3schools.com/html/html5_svg.asp  
 https://stackoverflow.com/questions/35814643/how-to-target-the-first-of-a-certain-class-in-a-ul-li-using-css?noredirect=1&lq=1 
+https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/svg?utm_source=chatgpt.com 
 
 
 
