@@ -14,16 +14,17 @@
 </head>
 
 <body>
-  <header class="header-class">
+  <header class="header-class" role="banner">
     <div class="container">
-      <nav role="navigation" class="logo-nav">
+      <nav role="navigation" class="logo-nav" aria-label="Main navigation">
+
         <!-- Logo image header-->
         <div class="header-logo">
           <img src="./images/logo.svg" alt="shortly-logo" />
         </div>
 
         <!-- Navbar -->
-        <ul class="nav-menu">
+        <ul class="nav-menu" role="list">
           <li class="nav-element"><a class="nav-link" href="#">Features</a></li>
           <li class="nav-element"><a class="nav-link" href="#">Pricing</a></li>
           <li class="nav-element"><a class="nav-link" href="#">Resources</a></li>
@@ -36,7 +37,7 @@
         </div>
 
         <!--Hamburger menu-->
-        <button class="nav-hamburger" aria-label="Toggle menu">
+        <button class="nav-hamburger" aria-label="Toggle navigation menu" type="button">
           ☰
         </button>
 
@@ -45,9 +46,10 @@
   </header>
 
   <!--Main content-->
-  <main>
+  <main role="main">
+
     <!--Hero section-->
-    <div class="hero-section">
+    <div class="hero-section" aria-labelledby="hero-heading">
       <div class="container">
         <div class="hero">
           <div class="welcome-part">
@@ -58,8 +60,8 @@
           </div>
 
           <!--Working Image-->
-          <div class="first-img">
-            <img src="./images/illustration-working.svg" alt="image-working on desk">
+          <div class="first-img" role="img" aria-label="Person working at desk">
+            <img src="./images/illustration-working.svg" alt="image-working on computer at desk">
           </div>
         </div>
       </div>
@@ -67,6 +69,7 @@
 
     <!--Shorten URL section-->
     <div class="input-section">
+
       <!--Input field-->
       <div class="container">
         <div class="url-container">
@@ -116,14 +119,14 @@
       </div>>
     </div>
 
-    <div class="boost-section">
+    <div class="boost-section" aria-labelledby="boost-heading">
       <h2>Boost your links today</h2>
       <button class="third-button">Get Started</button>
     </div>
   </main>
 
   <!--Footer-->
-  <footer>
+  <footer role="contentinfo">
     <div class="container">
       <div class="footer-part">
         <div class="bottom-logo">
@@ -134,7 +137,7 @@
         </div>
 
         <div class="footer-section">
-          <ul class="links-list">
+          <ul class="links-list" role="list">
             <li class="containers">Features</li>
             <li><a href="#">Link Shortening</a></li>
             <li><a href="#">Branded Links</a></li>
@@ -143,7 +146,7 @@
         </div>
 
         <div class="footer-section">
-          <ul class="links-list">
+          <ul class="links-list" role="list">
             <li class="containers">Resources</li>
             <li><a href="#">Blog</a></li>
             <li><a href="#">Developers</a></li>
@@ -152,7 +155,7 @@
         </div>
 
         <div class="footer-section">
-          <ul class="links-list">
+          <ul class="links-list" role="list">
             <li class="containers">Company</li>
             <li><a href="#">About</a></li>
             <li><a href="#">Our Team</a></li>
