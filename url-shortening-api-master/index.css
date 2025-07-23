@@ -23,7 +23,6 @@ body {
 }
 
 .header-logo img {
-    max-width: 120px;
     display: block;
     max-width: 100%;
 }
@@ -137,7 +136,7 @@ input[type=text] {
 
 .input-section {
     padding: 4rem 0;
-    background: linear-gradient(180deg, #fff 50%, f2f2f2 50%);
+    background: linear-gradient(180deg, #fff 50%, #f2f2f2 50%);
 }
 
 .url-container {
@@ -161,6 +160,7 @@ input[type=text] {
     bottom: 15px;
 }
 
+/* Shows error message when validation fails */
 .url-container .error-message.error {
     display: block;
 }
@@ -171,6 +171,7 @@ input[type=text] {
     flex: 5;
 }
 
+/* Adds red border to input field when URL is invalid */
 .url-container input.error {
     border: 2px solid red;
 }
@@ -180,7 +181,6 @@ input[type=text] {
     flex: 1;
     border-radius: 0.5rem;
     font-weight: 700;
-    ;
     background-color: hsl(180, 66%, 49%);
     cursor: pointer;
     display: block;
@@ -193,10 +193,12 @@ input[type=text] {
 
 }
 
+/* Makes the shortened links history section visible when URLs are added */
 .offer-section .links-part.active {
     margin-bottom: 4rem;
 }
 
+/* Styles each individual shortened URL item in the history */
 .offer-section .links-part .item {
     background-color: white;
     padding: 1.5rem;
@@ -208,6 +210,7 @@ input[type=text] {
     align-items: center;
 }
 
+/* Styles the container holding the shortened link and copy button */
 .offer-section .links-part .item .short-link {
     color: hsl(180, 66%, 49%);
     display: flex;
@@ -215,6 +218,7 @@ input[type=text] {
     gap: 1rem;
 }
 
+/* Styles the copy button next to each shortened URL */
 .offer-section .links-part .item .short-link .copy-btn {
     background-color: hsl(180, 66%, 49%);
     color: white;
@@ -505,6 +509,7 @@ footer {
         transform: translateX(-50%);
     }
 
+    /* Mobile layout for shortened URL history items - stacks vertically */
     .offer-section .links-part .item {
         flex-direction: column;
         align-items: stretch;
@@ -512,18 +517,21 @@ footer {
         text-align: left;
     }
 
+     /* Styles original URL with bottom border separator on mobile */
     .offer-section .links-part .item .link {
         word-break: break-all;
         padding-bottom: 1rem;
         border-bottom: 1px solid #f1f1f1;
     }
 
+    /* Mobile layout for shortened link section, stacks copy button below URL */
     .offer-section .links-part .item .short-link {
         flex-direction: column;
         align-items: stretch;
         gap: 1rem;
     }
 
+    /* Full-width copy button styling for mobile */
     .offer-section .links-part .item .short-link .copy-btn {
         padding: 0.75rem;
         width: 100%;

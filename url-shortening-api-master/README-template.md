@@ -31,6 +31,11 @@ https://www.w3schools.com/howto/howto_js_mobile_navbar.asp
 https://www.w3schools.com/html/html5_svg.asp  
 https://stackoverflow.com/questions/35814643/how-to-target-the-first-of-a-certain-class-in-a-ul-li-using-css?noredirect=1&lq=1 
 https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/svg?utm_source=chatgpt.com 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/value 
+https://developer.mozilla.org/en-US/docs/Web/API/URL/URL 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith 
+https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend 
+https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText 
 
 
 
