@@ -1,214 +1,104 @@
-// URL Shortener JavaScript using HTML structure and Bitly API
+// Select DOM elements
+const urlInput = document.getElementById('link-input');
+const errorMessageEl = document.getElementById('error-message');
+const activateBtn = document.querySelector('.second-btn');
+const linksHistoryEl = document.getElementById('links-part');
 
-const urlInput = document.querySelector('.url-container input[type="text"]')
-const errorMessageEl = document.getElementById('error-message')
-const activateBtn = document.querySelector('.second-btn')
-const linksHistoryEl = document.getElementById('links-part')
-
-//Bitly API token
-const BITLY_TOKEN = 'b2218ef7143d1499949570a10c1ed1b57d5c04a3'
-
+// 🔹 Get the value from the input field, trim it, and convert it to lowercase
 function getUrlInput() {
-    return urlInput.value.trim()
+    return urlInput.value.trim().toLowerCase();
 }
 
-async function shortenUrl(urlLink) {
-    const apiUrl = 'https://api-ssl.bitly.com/v4/shorten'
-    
-    // Add https:// if not present
-    let fullUrl = urlLink
-    if (!urlLink.startsWith('http://') && !urlLink.startsWith('https://')) {
-        fullUrl = 'https://' + urlLink
+// 🔹 Check if the entered string is a valid URL
+function isValidUrl(url) {
+    try {
+        // Ensure URL has http/https prefix
+        new URL(url.startsWith('http') ? url : 'https://' + url);
+        return true;
+    } catch (_) {
+        return false;
     }
+}
+
+// 🔹 Send the long URL to the Bitly API and get a shortened link
+async function shortenUrl(urlLink) {
+    const apiUrl = 'https://api-ssl.bitly.com/v4/shorten';
+    const fullUrl = urlLink.startsWith('http') ? urlLink : 'https://' + urlLink;
 
     try {
         const res = await fetch(apiUrl, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${BITLY_TOKEN}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer b2218ef7143d1499949570a10c1ed1b57d5c04a3' 
             },
-            body: JSON.stringify({
-                long_url: fullUrl
-            })
-        })
+            body: JSON.stringify({ long_url: fullUrl }),
+        });
 
+        // If response is OK, parse and display the shortened URL
         if (res.ok) {
-            const data = await res.json()
-            displayToLinksHistory(fullUrl, data)
-            saveToLocalStorage(fullUrl, data.link)
+            const data = await res.json();
+            displayToLinksHistory(urlLink, { result_url: data.link });
         } else {
-            const errorData = await res.json()
-            console.error(`Error shortening URL: ${res.statusText}`, errorData)
-            errorMessageEl.textContent = 'Failed to shorten URL. Please try again.'
-            errorMessageEl.classList.add('error')
+            // Handle Bitly API error
+            console.error(`Bitly error: ${res.statusText}`);
+            errorMessageEl.textContent = 'Error shortening URL. Try again.';
+            errorMessageEl.classList.add('error');
         }
     } catch (error) {
-        console.error('Network error:', error)
-        errorMessageEl.textContent = 'Network error. Please check your connection.'
-        errorMessageEl.classList.add('error')
+        // Handle network errors 
+        console.error('Network error:', error);
+        errorMessageEl.textContent = 'Network error. Please check your connection.';
+        errorMessageEl.classList.add('error');
     }
 }
 
-function isValidUrl(url) {
-    try {
-        // Add protocol if missing for validation
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            url = 'https://' + url
-        }
-        new URL(url)
-        return true
-    } catch (_) {
-        return false
-    }
-}
-
+// 🔹 Display the original and shortened link in the history section
 function displayToLinksHistory(originalLink, urlData) {
-    const linkItem = document.createElement('div')
-    linkItem.classList.add('item')
+    const linkItem = document.createElement('div');
+    linkItem.classList.add('item');
+
+    // Inject HTML into the new link item
     linkItem.innerHTML = `
-        <div class='link'>${originalLink}</div>
+        <p class='link'>${originalLink}</p>
+        <hr>
         <div class='short-link'>
-            <a href="${urlData.link}" target="_blank">${urlData.link}</a>
-            <button class='copy-btn'>Copy</button>
+            <p>${urlData.result_url}</p>
+            <button class='copy-link-btn'>Copy</button>
         </div>
-    `
+    `;
 
-    // Add to the beginning of the list
-    linksHistoryEl.insertBefore(linkItem, linksHistoryEl.firstChild)
+    // Make history container visible and add new link at the top
+    linksHistoryEl.classList.add('active');
+    linksHistoryEl.prepend(linkItem);
 
-    // Add copy functionality
-    linkItem.querySelector('.copy-btn').addEventListener('click', (e) => {
-        let copyUrl = urlData.link
-        navigator.clipboard.writeText(copyUrl).then(() => {
-            e.target.style.backgroundColor = 'hsl(257, 27%, 26%)'
-            e.target.textContent = 'Copied!'
+    // 🔹 Add copy functionality to the button
+    const copyBtn = linkItem.querySelector('.copy-link-btn');
+    copyBtn.addEventListener('click', () => {
+        const copyUrl = urlData.result_url;
 
-            setTimeout(() => {
-                e.target.style.backgroundColor = 'hsl(180, 66%, 49%)'
-                e.target.textContent = 'Copy'
-            }, 1500)
-        }).catch(err => {
-            console.error('Failed to copy: ', err)
-            // Fallback for older browsers
-            fallbackCopyTextToClipboard(copyUrl, e.target)
-        })
-    })
-}
+        // Use clipboard API to copy shortened URL
+        navigator.clipboard.writeText(copyUrl).catch(err => {
+            console.error('Clipboard error:', err);
+        });
 
-function fallbackCopyTextToClipboard(text, button) {
-    const textArea = document.createElement("textarea")
-    textArea.value = text
-    textArea.style.top = "0"
-    textArea.style.left = "0"
-    textArea.style.position = "fixed"
-    
-    document.body.appendChild(textArea)
-    textArea.focus()
-    textArea.select()
-    
-    try {
-        document.execCommand('copy')
-        button.style.backgroundColor = 'hsl(257, 27%, 26%)'
-        button.textContent = 'Copied!'
         
-        setTimeout(() => {
-            button.style.backgroundColor = 'hsl(180, 66%, 49%)'
-            button.textContent = 'Copy'
-        }, 1500)
-    } catch (err) {
-        console.error('Fallback: Unable to copy', err)
-    }
-    
-    document.body.removeChild(textArea)
+    });
 }
 
-function saveToLocalStorage(originalUrl, shortUrl) {
-    let links = getLinksFromStorage()
-    
-    // Add new link to the beginning
-    links.unshift({
-        original: originalUrl,
-        short: shortUrl,
-        timestamp: Date.now()
-    })
-    
-    // Keep only last 10 links
-    links = links.slice(0, 10)
-    
-    localStorage.setItem('shortened_links', JSON.stringify(links))
-}
-
-function getLinksFromStorage() {
-    const stored = localStorage.getItem('shortened_links')
-    return stored ? JSON.parse(stored) : []
-}
-
-function loadLinksFromStorage() {
-    const links = getLinksFromStorage()
-    
-    if (links.length > 0) {
-        linksHistoryEl.classList.add('active')
-        
-        links.forEach(link => {
-            displayToLinksHistory(link.original, { link: link.short })
-        })
-    }
-}
-
-// Main event listener
-activateBtn.addEventListener('click', async () => {
-    const userURL = getUrlInput()
+// 🔹 Handle button click: validate input and trigger shortening process
+activateBtn.addEventListener('click', () => {
+    const userURL = getUrlInput();
 
     if (!userURL || !isValidUrl(userURL)) {
-        errorMessageEl.classList.add('error')
-        urlInput.classList.add('error')
+        // Show error if input is empty or invalid
+        errorMessageEl.classList.add('error');
+        urlInput.classList.add('error');
     } else {
-        errorMessageEl.classList.remove('error')
-        urlInput.classList.remove('error')
-        
-        // Show loading state
-        activateBtn.textContent = 'Shortening...'
-        activateBtn.disabled = true
-        
-        linksHistoryEl.classList.add('active')
-        
-        await shortenUrl(userURL)
-        
-        // Reset button and clear input
-        activateBtn.textContent = 'Shorten It!'
-        activateBtn.disabled = false
-        urlInput.value = ''
+        // Clear errors and proceed
+        errorMessageEl.classList.remove('error');
+        urlInput.classList.remove('error');
+        shortenUrl(userURL);
+        urlInput.value = '';
     }
-})
-
-// Enter key support
-urlInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        activateBtn.click()
-    }
-})
-
-// Clear error when user starts typing
-urlInput.addEventListener('input', () => {
-    errorMessageEl.classList.remove('error')
-    urlInput.classList.remove('error')
-})
-
-// Load saved links when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    loadLinksFromStorage()
-})
-
-// Smooth scroll for navigation (bonus feature)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault()
-        const target = document.querySelector(this.getAttribute('href'))
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            })
-        }
-    })
-})
+});
