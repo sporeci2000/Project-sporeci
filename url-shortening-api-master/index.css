@@ -222,8 +222,23 @@ input[type=text] {
 .offer-section .links-part .item .short-link .copy-btn {
     background-color: hsl(180, 66%, 49%);
     color: white;
-    padding: 1rem 2rem;
-    font-weight: 700;
+    border: none;
+    padding: 0.4rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 2px solid hsl(180, 66%, 49%);
+}
+
+.offer-section .links-part .item .short-link .copy-btn:hover {
+    background-color: hsl(180, 66%, 60%);
+    border-color: hsl(180, 66%, 60%);
+}
+
+.offer-section .links-part .item .short-link .copy-btn.copied {
+    background-color: hsl(257, 27%, 26%);
+    border-color: hsl(257, 27%, 26%);
 }
 
 .offer-section {
@@ -373,9 +388,20 @@ footer {
     cursor: pointer;
 }
 
+.mobile-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2.5rem;
+    margin-right: auto;
+}
 
+.mobile-menu hr {
+    display: none;
+}
 
 @media (max-width: 768px) {
+
     .container {
         width: 95%;
         padding: 0 1rem;
@@ -384,16 +410,10 @@ footer {
     .logo-nav {
         justify-content: space-between;
         padding: 1.5rem 0;
+        position: relative;
     }
 
-    .nav-menu {
-        display: none;
-    }
-
-    .login-buttons {
-        display: none;
-    }
-
+    /* Shows hamburger on mobile */
     .nav-hamburger {
         display: block;
         background: none;
@@ -401,8 +421,92 @@ footer {
         font-size: 1.5rem;
         cursor: pointer;
         color: hsl(0, 0%, 0%);
+        z-index: 101;
     }
 
+    /* Transform mobile menu into dropdown */
+    .mobile-menu {
+        display: none;
+        /* Hidden by default */
+        position: absolute;
+        top: 100%;
+        left: 5%;
+        right: 5%;
+        background-color: hsl(257, 27%, 26%);
+        border-radius: 12px;
+        padding: 2.5rem 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+        z-index: 100;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Shows mobile menu when hamburger is clicked */
+    .mobile-menu.show {
+        display: flex;
+    }
+
+    /* Stacks nav items vertically */
+    .mobile-menu .nav-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Whites text for nav links on mobile */
+    .mobile-menu .nav-link {
+        color: white !important;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+    }
+
+    /* Horizontal rule separator on mobile */
+    .mobile-menu hr {
+        display: block;
+        width: 100%;
+        border: none;
+        border-top: 1px solid hsl(257, 15%, 45%);
+        margin: 0.5rem 0;
+    }
+
+    /* Stacks login buttons vertically */
+    .mobile-menu .login-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        align-items: center;
+    }
+
+    /* Whites text for login link on mobile */
+    .mobile-menu .login-link {
+        color: white !important;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+    }
+
+    /* Full width signup button */
+    .mobile-menu .signup-link {
+        background-color: hsl(180, 66%, 49%);
+        color: white;
+        width: 100%;
+        padding: 1rem 0;
+        border-radius: 30px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        text-align: center;
+        display: block;
+    }
+
+    /* Hero section mobile styles */
     .hero {
         grid-template-columns: 1fr;
         text-align: center;
@@ -443,6 +547,7 @@ footer {
         padding: 0.75rem 2rem;
     }
 
+    /* Input section mobile styles */
     .input-section {
         padding: 2rem 0;
     }
@@ -472,6 +577,7 @@ footer {
         font-size: 1.1rem;
     }
 
+    /* Offer section mobile styles */
     .offer-section {
         padding-bottom: 2rem;
     }
@@ -517,7 +623,7 @@ footer {
         text-align: left;
     }
 
-     /* Styles original URL with bottom border separator on mobile */
+    /* Styles original URL with bottom border separator on mobile */
     .offer-section .links-part .item .link {
         word-break: break-all;
         padding-bottom: 1rem;
@@ -540,6 +646,7 @@ footer {
         cursor: pointer;
     }
 
+    /* Boost section mobile styles */
     .boost-section {
         background-image: url(images/bg-boost-mobile.svg);
         background-position: center;
@@ -556,6 +663,7 @@ footer {
         font-size: 1.1rem;
     }
 
+    /* Footer mobile styles */
     .footer-part {
         text-align: center;
         gap: 2rem;

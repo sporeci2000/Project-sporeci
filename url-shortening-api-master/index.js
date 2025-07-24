@@ -3,6 +3,9 @@ const linkInput = document.getElementById('link-input');
 const errorMessage = document.getElementById('error-message');
 const buttonElement = document.getElementById('second-btn');
 const linksPart = document.getElementById('links-part');
+const hamburger = document.querySelector('.nav-hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+
 
 //Get the value from the input field, trim it, and convert it to lowercase
 function getUrlInput() {
@@ -81,13 +84,27 @@ function displayToLinksHistory(originalLink, urlData) {
 
         // Use clipboard API to copy shortened URL
         //Copies text to clipboard
-        navigator.clipboard.writeText(copyUrl).catch(err => {
+        navigator.clipboard.writeText(copyUrl).then(() => {
+            // Update the button text
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('copied');
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
             console.error('Clipboard error:', err);
         });
-
-
     });
 }
+
+//Hamburger toggle
+hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+});
+
 
 //Main Event Handler
 //Handle button click: validate input and trigger shortening process
