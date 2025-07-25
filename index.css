@@ -27,18 +27,24 @@ body {
     max-width: 100%;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
 .logo-nav {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    justify-content: space-between;
     padding: 2rem 0;
+    width: 100%;
 }
 
 .nav-menu {
     display: flex;
     gap: 1rem;
     list-style: none;
-    margin-right: auto;
     font-weight: 500;
 }
 
@@ -55,33 +61,40 @@ body {
     color: hsla(257, 11%, 21%, 1);
 }
 
-.login-buttons {
+.desktop-login-buttons {
     font-weight: 700;
     gap: 1.5rem;
     display: flex;
     align-items: center;
+
 }
 
-.login-buttons .login-link {
+.mobile-login-buttons {
+    display: none;
+}
+
+.mobile-menu hr {
+    display: none;
+}
+
+
+
+.desktop-login-buttons .login-link {
     color: hsl(257, 7%, 63%);
     text-decoration: none;
 }
 
-.login-buttons .signup-link {
+.desktop-login-buttons .signup-link {
     background: hsl(180, 66%, 49%);
     color: white;
     padding: 0.5rem 1.5rem;
     border-radius: 1.5rem;
     font-weight: 700;
     text-decoration: none;
-
 }
 
-.login-buttons .signup-link:hover {
-    padding: 0.5rem 1.5rem;
-    border-radius: 1.5rem;
+.desktop-login-buttons .signup-link:hover {
     background-color: hsl(180, 72%, 86%);
-    color: white
 }
 
 .nav-hamburger {
@@ -389,16 +402,18 @@ footer {
 }
 
 .mobile-menu {
-    display: flex;
+
+    display: none;
     flex-direction: row;
     align-items: center;
     gap: 2.5rem;
-    margin-right: auto;
 }
 
 .mobile-menu hr {
     display: none;
 }
+
+
 
 @media (max-width: 768px) {
 
@@ -411,6 +426,10 @@ footer {
         justify-content: space-between;
         padding: 1.5rem 0;
         position: relative;
+    }
+
+    .nav-left .nav-menu {
+        display: none;
     }
 
     /* Shows hamburger on mobile */
@@ -683,4 +702,49 @@ footer {
     .footer-section ul li {
         margin-bottom: 0.75rem;
     }
+
+    .desktop-login-buttons {
+        display: none;
+    }
+
+    /* Show mobile login buttons inside hamburger menu */
+    .mobile-login-buttons {
+        font-weight: 700;
+        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-login-link {
+        color: white !important;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+        text-decoration: none;
+    }
+
+    .mobile-signup-link {
+        background-color: hsl(180, 66%, 49%);
+        color: white;
+        width: 100%;
+        padding: 1rem 0;
+        border-radius: 30px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        text-align: center;
+        display: block;
+    }
+
+    /* Show the hr separator on mobile */
+    .mobile-menu hr {
+        display: block !important;
+        width: 100%;
+        border: none;
+        border-top: 1px solid hsl(257, 15%, 45%);
+        margin: 0.5rem 0;
+    }
+
 }
