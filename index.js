@@ -18,7 +18,7 @@ function isValidUrl(url) {
         // Ensure URL has http/https prefix
         new URL(url.startsWith('http') ? url : 'https://' + url);
         return true;
-    } catch (_) {
+    } catch (error) {
         return false;
     }
 }
