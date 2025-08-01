@@ -38,18 +38,18 @@ async function shortenUrl(urlLink) {
             body: JSON.stringify({ long_url: fullUrl }),
         });
 
-        // If response is OK, parse and display the shortened URL
+        //If response is OK, parse and display the shortened URL
         if (res.ok) {
             const data = await res.json();
             displayToLinksHistory(urlLink, { result_url: data.link });
         } else {
-            // Handle Bitly API error
+            //Handle Bitly API error
             console.error(`Bitly error: ${res.statusText}`);
             errorMessage.textContent = 'Error shortening URL. Please try again.';
             errorMessage.classList.add('error');
         }
     } catch (error) {
-        // Handle network errors 
+        //Handle network errors 
         console.error('Network error:', error);
         errorMessage.textContent = 'Network error. Please check your connection.';
         errorMessage.classList.add('error');
@@ -77,19 +77,19 @@ function displayToLinksHistory(originalLink, urlData) {
     //Inserts element as first child
     linksPart.prepend(linkItem);
 
-    // 🔹 Add copy functionality to the button
+    //Add copy functionality to the button
     const copyBtn = linkItem.querySelector('.copy-btn');
     copyBtn.addEventListener('click', () => {
         const copyUrl = urlData.result_url;
 
-        // Use clipboard API to copy shortened URL
+        //Use clipboard API to copy shortened URL
         //Copies text to clipboard
         navigator.clipboard.writeText(copyUrl).then(() => {
-            // Update the button text
+            //Update the button text
             copyBtn.textContent = 'Copied!';
             copyBtn.classList.add('copied');
 
-            // Reset after 2 seconds
+            //Reset after 2 seconds
             setTimeout(() => {
                 copyBtn.textContent = 'Copy';
                 copyBtn.classList.remove('copied');
